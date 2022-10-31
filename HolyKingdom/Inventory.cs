@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace HolyKingdom
 {
-    public class Actor : Person
+    public class Inventory
     {
-        Inventory Inventory = new Inventory();
-        public Actor(float HP, float MP, Stats stats, string name) : base(HP, MP, stats, name)
+        public List<Item> Items { get; set; }
+        public Inventory()
         {
-
+            Items = new List<Item>();
         }
     }
 }

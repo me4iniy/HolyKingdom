@@ -9,15 +9,17 @@ namespace HolyKingdom
 {
     public class Person
     {
+        public string Name { get; private set; }
         public float HP { get; private set; }// heals points
         public float MP { get; private set; }// mana points
         public Stats Stats { get; private set; }
 
-        public Person(float HP, float MP, Stats stats)
+        public Person(float HP, float MP, Stats stats, string name)
         {
             this.HP = HP;
             this.MP = MP;
             this.Stats = stats;
+            this.Name = name;
         }
         public void TakeDamage(float damage, out bool isDead)
         {
@@ -48,7 +50,7 @@ namespace HolyKingdom
         public float Intelligence { get; private set; }
         public float Charisma { get; private set; }
 
-        private float[] ChangeFactors;//multiply experience for stats
+        private readonly float[] ChangeFactors;//multiply experience for stats
         public Stats(float strength, float dexterity, float wisdom, float intelligence, float charisma, float[] changeFactors)
         {
             Strength = strength;
@@ -64,7 +66,7 @@ namespace HolyKingdom
         }
         public void UpgradeStat(float gainedExperience, StatTypes statType, out bool isLVLUp)//100 exp = 1 lvl, 200 exp = 2 lvl, 400 exp = 3 lvl
         {
-            //One of stats upgraded on "exp / ((100 ^ formula actual LVL) * change factor)"
+            //One of stats upgraded on "exp / ((100 ^ actual LVL) * change factor)"
 
             int _tempLVL = 0;
             int _tempNewLVL = 0;

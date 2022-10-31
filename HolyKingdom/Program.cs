@@ -6,7 +6,7 @@ namespace HolyKingdom
     {
         public static void Main()
         {
-
+            
         }
     }
 }
