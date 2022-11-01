@@ -8,10 +8,10 @@ namespace HolyKingdom
 {
     public class Inventory
     {
-        public List<Item> Items { get; set; }
+        private readonly List<Item> _items;
         public Inventory()
         {
-            Items = new List<Item>();
+            _items = new List<Item>();
         }
     }
 }

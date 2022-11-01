@@ -9,7 +9,7 @@ namespace HolyKingdom
     public class Actor : Person
     {
         Inventory Inventory = new Inventory();
-        public Actor(float HP, float MP, Stats stats, string name) : base(HP, MP, stats, name)
+        public Actor(float HP, float MP, float SP, Stats stats, string name) : base(HP, MP, SP, stats, name)
         {
 
         }

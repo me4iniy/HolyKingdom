@@ -12,33 +12,36 @@ namespace HolyKingdom
         public string Name { get; private set; }
         public float HP { get; private set; }// heals points
         public float MP { get; private set; }// mana points
-        public Stats Stats { get; private set; }
+        public float SP { get; private set; }// stamina points
+        public Stats Stats { get; private set; } // not encapsulation 
 
-        public Person(float HP, float MP, Stats stats, string name)
+        public Person(float HP, float MP, float SP, Stats stats, string name)
         {
             this.HP = HP;
             this.MP = MP;
             this.Stats = stats;
             this.Name = name;
+            this.SP = SP;
         }
         public void TakeDamage(float damage, out bool isDead)
         {
             HP -= damage;
 
-            if (HP < 0)
-                isDead=true;
-            else
-                isDead=false;
+            isDead = (HP < 0) ? true : false;
         }
         public void SpendMana(float manaUsed, out bool isSpend)
         {
             if (MP - manaUsed > 0)
                 MP -= manaUsed;
 
-            if (MP < 0)
-                isSpend = true;
-            else
-                isSpend = false;
+            isSpend = (MP < 0) ? true : false;
+        }
+        public void SpendStamina(float staminaUsed, out bool isSpend)
+        {
+            if (SP - staminaUsed > 0)
+                SP -= staminaUsed;
+
+            isSpend = (SP < 0) ? true : false;
         }
     }
     public class Stats
