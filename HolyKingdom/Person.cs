@@ -29,14 +29,14 @@ namespace HolyKingdom
 
             isDead = (HP < 0) ? true : false;
         }
-        public void SpendMana(float manaUsed, out bool isSpend)
+        public void TrySpendingMana(float manaUsed, out bool isSpend)
         {
             if (MP - manaUsed > 0)
                 MP -= manaUsed;
 
             isSpend = (MP < 0) ? true : false;
         }
-        public void SpendStamina(float staminaUsed, out bool isSpend)
+        public void TrySpendingStamina(float staminaUsed, out bool isSpend)
         {
             if (SP - staminaUsed > 0)
                 SP -= staminaUsed;

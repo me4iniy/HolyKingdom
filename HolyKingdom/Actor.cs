@@ -8,7 +8,9 @@ namespace HolyKingdom
 {
     public class Actor : Person
     {
-        Inventory Inventory = new Inventory();
+        public float Money { get; private set; } = 0f;
+        public Inventory Inventory { get; private set; } = new Inventory();
+
         public Actor(float HP, float MP, float SP, Stats stats, string name) : base(HP, MP, SP, stats, name)
         {
 

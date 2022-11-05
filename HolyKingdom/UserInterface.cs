@@ -51,19 +51,25 @@ namespace HolyKingdom
 
                 Console.Write($" ##");
             }
-            Console.Write("\n");
+            
             if (separators)
             {
+                Console.Write("\n");
+
                 for (int i = 0; i < _MaxTextLineLength; i++)//Def end
                     Console.Write('#');
             }
         }
-
+        public static void ShowTextFromArray(string[] linesOfText)
+        {
+            foreach (string lineOfText in linesOfText)
+                ShowText(lineOfText, ConsoleColor.White, false);
+        }
         /// <summary>
         /// Returns the index of the selected element, if exit, returns -1.
         /// </summary>
-        
-        public static int GetSelectOfOne(string[] linesOfTextForChose)
+
+        public static int GetSelectOfOne(string[] linesOfTextForChose, string descriptionOfChoice = "")
         {
             bool exit = false;
             int selectedLine = 0;
@@ -71,6 +77,9 @@ namespace HolyKingdom
             while (!exit)
             {
                 Console.Clear();
+
+                if (descriptionOfChoice != "")
+                    ShowText(descriptionOfChoice, ConsoleColor.Blue);
 
                 for (int i = 0; i < linesOfTextForChose.Length; i++)
                     if (selectedLine == i)
@@ -104,10 +113,16 @@ namespace HolyKingdom
             }
             return selectedLine;
         }
-        public static void ShowTextFromArray(string[] linesOfText)
+        
+        public static int ShowAndGetSelectInMainMenu(float actualGameVersion)
         {
-            foreach (string lineOfText in linesOfText)
-                ShowText(lineOfText, ConsoleColor.White, false);
+            ShowTextFromArray(new string[] { "Мы рады приветствовать вас в нашей игре.", $"Текущая версия игры {actualGameVersion}", "", "Надеемся, что вам хоть немножечко понравиться." });
+            Thread.Sleep(3000);
+            return GetSelectOfOne(new string[] { "Новая игра", "Загрузить", "Сохранить" }, "Для выбора используйте стелочки, или клавиши W | S");
+        }
+        public static int ShowAndGetSelectInGameMenu()
+        {
+            return GetSelectOfOne(new string[] { "Отправиться в подземелья", "Отправиться в город"}, $"Для выбора используйте стелочки, или клавиши W | S");
         }
     }
 }
