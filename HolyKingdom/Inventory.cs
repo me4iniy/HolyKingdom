@@ -8,7 +8,7 @@ namespace HolyKingdom
 {
     public class Inventory
     {
-        private List<Item> _items = new List<Item>();
+        private List<Item> _Items = new List<Item>();
         public Item.Armor? EquippedArmor { get; set; } = null;
         public Item.Weapon? EquippedWeapon { get; set; } = null;
 

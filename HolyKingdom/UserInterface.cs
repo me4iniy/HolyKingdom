@@ -11,10 +11,10 @@ namespace HolyKingdom
     {
         private const int _MaxTextLineLength = 100;
         private const int _CountOfDefaultSybols = 6;
-        
-        public static void ShowText(string textForWrite, ConsoleColor consoleTextColor = ConsoleColor.White, bool separators = true)
+
+        public static void ShowText(string textForWrite, ConsoleColor consoleTextColor = ConsoleColor.White, bool separators = true, bool downSeparator = true, bool upSeparator = true)
         {
-            if (separators)
+            if (separators && upSeparator)
             {
                 Console.Write("\n");
 
@@ -52,7 +52,7 @@ namespace HolyKingdom
                 Console.Write($" ##");
             }
             
-            if (separators)
+            if (separators && downSeparator)
             {
                 Console.Write("\n");
 
@@ -60,16 +60,28 @@ namespace HolyKingdom
                     Console.Write('#');
             }
         }
-        public static void ShowTextFromArray(string[] linesOfText)
+        public static void ShowTextFromArray(string[] linesOfText, bool separators = true)
         {
-            foreach (string lineOfText in linesOfText)
-                ShowText(lineOfText, ConsoleColor.White, false);
+            for(int i = 0; i < linesOfText.Length; i++)
+            {
+                if (separators)
+                {
+                    ShowText(linesOfText[i], ConsoleColor.White, separators);
+                }
+                else
+                {
+                    if ((i + 1) == linesOfText.Length)
+                        ShowText(linesOfText[i]);
+                    else
+                        ShowText(linesOfText[i], ConsoleColor.White, true, false);
+                }
+
+            }
         }
         /// <summary>
         /// Returns the index of the selected element, if exit, returns -1.
         /// </summary>
-
-        public static int GetSelectOfOne(string[] linesOfTextForChose, string descriptionOfChoice = "")
+        public static int GetSelectOfOne(string[] linesOfTextForChose, string descriptionOfChoice = "", bool isBack = true)
         {
             bool exit = false;
             int selectedLine = 0;
@@ -79,18 +91,23 @@ namespace HolyKingdom
                 Console.Clear();
 
                 if (descriptionOfChoice != "")
-                    ShowText(descriptionOfChoice, ConsoleColor.Blue);
+                    ShowText(descriptionOfChoice, ConsoleColor.Blue, true, false);
 
                 for (int i = 0; i < linesOfTextForChose.Length; i++)
+                {
                     if (selectedLine == i)
-                        ShowText(linesOfTextForChose[i], ConsoleColor.Green);
+                        ShowText(linesOfTextForChose[i], ConsoleColor.Green, true, false);
                     else
-                        ShowText(linesOfTextForChose[i]);
+                        ShowText(linesOfTextForChose[i], ConsoleColor.White, true, false);
+                }
 
-                if (selectedLine == linesOfTextForChose.Length)
-                    ShowText("Выйти", ConsoleColor.Green);
-                else
-                    ShowText("Выйти");
+                if (isBack)
+                {
+                    if (selectedLine == linesOfTextForChose.Length)
+                        ShowText("Выйти", ConsoleColor.Green);
+                    else
+                        ShowText("Выйти");
+                }
 
                 ConsoleKey inputKey = Console.ReadKey().Key;
 
@@ -113,7 +130,6 @@ namespace HolyKingdom
             }
             return selectedLine;
         }
-        
         public static int ShowAndGetSelectInMainMenu(float actualGameVersion)
         {
             ShowTextFromArray(new string[] { "Мы рады приветствовать вас в нашей игре.", $"Текущая версия игры {actualGameVersion}", "", "Надеемся, что вам хоть немножечко понравиться." });

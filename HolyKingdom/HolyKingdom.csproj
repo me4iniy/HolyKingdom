@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Components\" />
+    <Folder Include="GameLogic\" />
+  </ItemGroup>
+
 </Project>

@@ -1,1 +1,2 @@
-﻿
+﻿Item.Weapon(Item.Weapon.TypesOfWeapon.ShortSword, new Elementary.ElementaryElements(2, 0, 0, 0, 0), "Ржавый короткий меч", "Есть ощущение, что этот меч пролежал в земле несколько лет.", 10f, 1, 1));
+Item.Armor(Item.Armor.TypesOfArmor.Light, new Elementary.ElementaryElements(0, 0, 0, 0, 0), "Майка", "В ней ТАК свежо... А, похоже в ней еще и дырка.", 10f, 0.2f, 1));

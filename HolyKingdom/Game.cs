@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace HolyKingdom
 {
-    public class Game
+    public static class Game
     {
-        private bool _exit = false;
+        public static void StartGame()
+        {
+            Data.CreateDefaultGame();
+        }
 
+        private static void GetMove()
+        {
 
+        }
     }
 }

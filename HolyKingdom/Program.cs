@@ -6,6 +6,8 @@ namespace HolyKingdom
     {
         public static void Main()
         {
+            //Person person = new Person(100, 100, 100, new Elementary.Stats(0, 0, 0, 0, 0, new float[5] { 0, 0, 0, 0, 0 }), "Name");
+
             //Console.WriteLine(UserInterface.GetSelectOfOne(new string[] { "First choise", "Second choise", "3 there" }));
 
             //UserInterface.ShowText("asdasd adsdad d d d ada sd a dasd sda d, d asd as, da,s da, dasdasdas d, d, ad,a sd, asd adsdas d, d,", ConsoleColor.White, false);
@@ -23,8 +25,7 @@ namespace HolyKingdom
             //UserInterface.ShowTextFromArray(new string[] { $"Вы получили: {prize.ToString()}, Поздравляю!" });
 
 
-            //Actor actor = new Actor(100, 100, 100, new Stats(1, 1, 1, 1, 1, new float[] {1, 1, 1, 1, 1}),"Actor");
-
+            //Actor actor = new Actor(100, 100, 100, new Elementary.Stats(0, 0, 0, 0, 0, new float[5] { 0, 0, 0, 0, 0 }), "Actor");
 
             /*
                 класс Actor - игровой персонаж игрока

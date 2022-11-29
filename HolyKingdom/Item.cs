@@ -1,4 +1,9 @@
 ﻿
+using System.Diagnostics;
+using System.Xml.Linq;
+using static HolyKingdom.Item.Weapon;
+using static System.Net.Mime.MediaTypeNames;
+
 namespace HolyKingdom
 {
     public class Item
@@ -7,27 +12,31 @@ namespace HolyKingdom
         public string Description { get; private set; }
         public float Price { get; private set; }
         public float Weight { get; private set; }
-        public Item(string name, string description, float price, float weight)
+        public int LVL { get; private set; }
+        public string ID { get; private set; }
+        public Item(string name, string description, float price, float weight, int LVL, string ID)
         {
-            Name = name;
-            Description = description;
-            Price = price;
-            Weight = weight;
+            this.Name = name;
+            this.Description = description;
+            this.Price = price;
+            this.Weight = weight;
+            this.LVL = LVL;
+            this.ID = ID;
         }
-        public override string ToString() => $"{Name}";
+        public override string ToString() => $"Предмет - {Name}";
 
         public class Armor : Item
         {
             public enum TypesOfArmor { Light, Medium, Heavy }
             public TypesOfArmor TypeOfArmor { get; private set; }
-            public float Defense { get; private set; }
+            public Elementary.ElementaryElements DefenseElements { get; private set; }
 
-            public Armor(TypesOfArmor typeOfArmor, float defense, string name,
-                                        string description, float price, float weight)
-                                        : base(name, description, price, weight)
+            public Armor(TypesOfArmor typeOfArmor, Elementary.ElementaryElements defenseElements, 
+                                        string name, string description, float price, float weight, int LVL, string ID)
+                                        : base(name, description, price, weight, LVL, ID)
             {
-                TypeOfArmor = typeOfArmor;
-                Defense = defense;
+                this.TypeOfArmor = typeOfArmor;
+                this.DefenseElements = defenseElements;
             }
             public override string ToString()
             {
@@ -40,22 +49,21 @@ namespace HolyKingdom
                     _ => throw new NotImplementedException()
                 };
 
-                return $"{Name}, это {tempSrtTypeOfArmor}, защита - {Defense}";
+                return $"[Броня] {Name}, это {tempSrtTypeOfArmor}, с защитой - {DefenseElements}";
             }
         }
         public class Weapon : Item
         {
             public enum TypesOfWeapon { ShortSword, LongSword, Bow, MagicStaff }
             public TypesOfWeapon TypeOfWeapon { get; private set; }
-            public float Damage { get; private set; }
-            public float AttackSpeed { get; private set; }
-            public Weapon(TypesOfWeapon typeOfWeapon, float damage, float attackSpeed,
-                                        string name, string description, float price, float weight)
-                                        : base(name, description, price, weight)
+            public Elementary.ElementaryElements DamageElements { get; private set; }
+
+            public Weapon(TypesOfWeapon typeOfWeapon, Elementary.ElementaryElements damageElements,
+                                        string name, string description, float price, float weight, int LVL, string ID)
+                                        : base(name, description, price, weight, LVL, ID)
             {
-                TypeOfWeapon = typeOfWeapon;
-                Damage = damage;
-                AttackSpeed = attackSpeed;
+                this.TypeOfWeapon = typeOfWeapon;
+                this.DamageElements = damageElements;
             }
             public override string ToString()
             {
@@ -69,20 +77,45 @@ namespace HolyKingdom
                     _ => throw new NotImplementedException()
                 };
 
-                return $"{Name}, это {tempSrtTypeOfWeapon}, урон - {Damage}, скорость атаки - {AttackSpeed}";
+                return $"[Оружие] {Name}, это {tempSrtTypeOfWeapon}, урон - {DamageElements}";
             }
         }
         public class Heal : Item
         {
             public float VolumeOfHeal { get; private set; }
 
+
             public Heal(float volumeOfHeal,
-                        string name, string description, float price, float weight)
-                        : base(name, description, price, weight)
+                        string name, string description, float price, float weight, int LVL, string ID)
+                        : base(name, description, price, weight, LVL, ID)
             {
                 VolumeOfHeal = volumeOfHeal;
             }
-            public override string ToString() => $"{Name}, лечит на {VolumeOfHeal}";
+            public override string ToString() => $"[Лечение] {Name}, лечит на {VolumeOfHeal}";
+        }
+        public class Resource : Item
+        {
+            public enum TypesOfResource { Wood }
+            public TypesOfResource TypeOfResource { get; private set; }
+            public Resource(TypesOfResource typeOfResource,
+                            string name, string description, float price, float weight, int LVL, string ID)
+                            : base(name, description, price, weight, LVL, ID)
+            {
+                this.TypeOfResource = typeOfResource;
+            }
+
+            public override string ToString()
+            {
+
+                string tempSrtTypeOfWeapon = TypeOfResource switch
+                {
+                    TypesOfResource.Wood => "Дерево",
+                    _ => throw new NotImplementedException()
+                };
+
+                return $"[Ресурс]{Name}, это {TypeOfResource}";
+            }
+
         }
     }
 }

@@ -11,7 +11,7 @@ namespace HolyKingdom
         public float Money { get; private set; } = 0f;
         public Inventory Inventory { get; private set; } = new Inventory();
 
-        public Actor(float HP, float MP, float SP, Stats stats, string name) : base(HP, MP, SP, stats, name)
+        public Actor(float HP, float MP, float SP, Elementary.Stats stats, string name) : base(HP, MP, SP, stats, name)
         {
 
         }
